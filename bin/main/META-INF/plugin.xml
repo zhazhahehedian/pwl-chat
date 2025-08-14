@@ -4,11 +4,9 @@
     <name>FishPi Chat</name>
     <vendor email="danbai@88.com" url="https://p00q.cn">DanBai</vendor>
     <description><![CDATA[
-   This is a [FishPi](https://fishpi.cn) chat plugin for IntelliJ IDEA.
-   
-   Supports IDEA versions 2022.1 and above.
+   This is a [FishPi](https://fishpi.cn) chat plugin.
 
-    这是一个连接[摸鱼派](https://fishpi.cn)聊天插件，支持IDEA 2022.1及以上版本。
+    这是一个连接[摸鱼派](https://fishpi.cn)聊天插件。
     ]]></description>
     <depends>com.intellij.modules.platform</depends>
     <extensions defaultExtensionNs="com.intellij">

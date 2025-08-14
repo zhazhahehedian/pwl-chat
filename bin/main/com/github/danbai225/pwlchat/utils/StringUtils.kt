@@ -17,7 +17,7 @@ object StringUtils {
                 // 一个byte格式化成两位的16进制，不足两位高位补零
                 sb.append(String.format("%02x", b))
             }
-            return sb.toString().replace("\\s".toRegex(), "").lowercase()
+            return sb.toString().replace("\\s".toRegex(), "").toLowerCase()
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
         }

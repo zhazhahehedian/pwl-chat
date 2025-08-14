@@ -7,13 +7,13 @@ plugins {
     // Java support
     id("java")
     // Kotlin support
-    id("org.jetbrains.kotlin.jvm") version "1.6.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.25"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.4.0"
+    id("org.jetbrains.intellij") version "1.17.4"
     // Gradle Changelog Plugin
-    id("org.jetbrains.changelog") version "1.3.1"
+    id("org.jetbrains.changelog") version "2.2.1"
     // Gradle Qodana Plugin
-    id("org.jetbrains.qodana") version "0.1.13"
+    id("org.jetbrains.qodana") version "2024.2.3"
 }
 
 group = properties("pluginGroup")
@@ -47,17 +47,16 @@ changelog {
 // Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
 qodana {
     cachePath.set(projectDir.resolve(".qodana").canonicalPath)
-    reportPath.set(projectDir.resolve("build/reports/inspections").canonicalPath)
-    saveReport.set(true)
-    showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
 }
+
 dependencies {
-    implementation("org.java-websocket:Java-WebSocket:1.5.2")
-    implementation("org.slf4j:slf4j-simple:1.7.25")
-    implementation("com.google.code.gson:gson:2.8.5")
-    implementation("org.jsoup:jsoup:1.14.2")
-    implementation("com.squareup.okhttp3:okhttp:3.14.4")
+    implementation("org.java-websocket:Java-WebSocket:1.5.7")
+    implementation("org.slf4j:slf4j-simple:2.0.16")
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("org.jsoup:jsoup:1.18.3")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }
+
 tasks {
     // Set the JVM compatibility versions
     properties("javaVersion").let {

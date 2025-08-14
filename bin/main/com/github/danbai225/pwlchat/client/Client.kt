@@ -8,11 +8,9 @@ import com.intellij.ide.util.PropertiesComponent
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.project.Project
 import com.jetbrains.rd.util.use
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.slf4j.Logger
@@ -29,7 +27,6 @@ class Client {
      */
     private var apiKey:String=""
     private var online: Int? = 0
-    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val client = OkHttpClient()
     var userName: String? = ""
     var password: String? = ""
@@ -54,10 +51,10 @@ class Client {
         connect()
         timer("定时Thread_name", false, 2000, 1000) {
             if (isLogin){
-                if (ws?.isClosed() == true&&!black) {
+                if (ws?.isClosed == true&&!black) {
                     oChat?.addInfoToOChat("ws", "连接已断开")
                     connect()
-                    if (ws?.isClosed() == false) {
+                    if (ws?.isClosed == false) {
                         oChat?.addInfoToOChat("ws", "连接已恢复")
                     }
                 }
@@ -71,22 +68,20 @@ class Client {
     }
     //加载持久数据
     private fun load() {
-        project?.let { PropertiesComponent.getInstance(it) }?.getValue("pwl_userName").let {
+        PropertiesComponent.getInstance().getValue("pwl_userName").let {
             if (it != null) {
                 userName = it
             }
         }
-        project?.let { PropertiesComponent.getInstance(it) }?.getValue("pwl_password").let {
+        PropertiesComponent.getInstance().getValue("pwl_password").let {
             if (it != null) {
                 password = it
             }
         }
-        project?.let { PropertiesComponent.getInstance(it) }?.getBoolean("pwl_eventLog").let {
-            if (it != null) {
-                eventLog = it
-            }
+        PropertiesComponent.getInstance().getBoolean("pwl_eventLog").let {
+            eventLog = it
         }
-        project?.let { PropertiesComponent.getInstance(it) }?.getValue("pwl_apiKey").let {
+        PropertiesComponent.getInstance().getValue("pwl_apiKey").let {
             if (it != null) {
                 apiKey = it
             }
@@ -95,13 +90,10 @@ class Client {
 
     //数据持久化
     fun save() {
-        project?.let { proj ->
-            val props = PropertiesComponent.getInstance(proj)
-            props.setValue("pwl_userName", userName)
-            props.setValue("pwl_password", password)
-            props.setValue("pwl_eventLog", eventLog)
-            props.setValue("pwl_apiKey", apiKey)
-        }
+        PropertiesComponent.getInstance().setValue("pwl_userName", userName)
+        PropertiesComponent.getInstance().setValue("pwl_password", password)
+        PropertiesComponent.getInstance().setValue("pwl_eventLog", eventLog)
+        PropertiesComponent.getInstance().setValue("pwl_apiKey", apiKey)
     }
 
     fun setOChatApi(o: oChat) {
@@ -196,7 +188,7 @@ class Client {
         if (msg.isEmpty()) {
             return
         }
-        coroutineScope.launch {
+        GlobalScope.launch {
             val call = post(
                 PWL_SEND,
                 "{\"content\":\"$msg\",\"client\":\"IDEA/1.0.0\"}"
@@ -345,7 +337,7 @@ class Client {
         when (msg.type) {
             "msg" -> {
                 if (msg.content.indexOf("\"msgType\":\"redPacket\"") > 0) {
-                    if (project?.let { PropertiesComponent.getInstance(it) }?.getBoolean("auto_packet",true) == true){
+                    if (PropertiesComponent.getInstance().getBoolean("auto_packet",true)){
                         //红包消息记录oid
                         msg.oId?.let {
                             if (pkList.size > 100) {
@@ -359,12 +351,11 @@ class Client {
                         lastOid = msg.oId
                     }
                     if(eventLog){
-                        var a = ""
-                        val targetLength = msg.content.length / 4
-                        while (a.length < targetLength){
-                            a += " "
+                        var a:String?=""
+                        while (a?.length!! <(msg?.content?.length?.div(4)!!)){
+                            a+=" "
                         }
-                        sendNotify(msg.userName, msg.content + "    " + a, NotificationType.INFORMATION)
+                        sendNotify(msg.userName, msg.content +"    "+a, NotificationType.INFORMATION)
                     }
                 }
             }

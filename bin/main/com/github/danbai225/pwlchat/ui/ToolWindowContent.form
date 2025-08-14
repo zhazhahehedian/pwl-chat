@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.github.danbai225.pwlchat.ui.ToolWindowContent">
+  <grid id="27dc6" binding="root" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <toolTipText value=""/>
+    </properties>
+    <border type="none" title="PWL" title-justification="2">
+      <font/>
+    </border>
+    <children>
+      <tabbedpane id="e14f6">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="da6c2" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <tabbedpane title="Log"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="be9e1" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="South"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="ec629" class="javax.swing.JButton" binding="send">
+                    <constraints border-constraint="East"/>
+                    <properties>
+                      <text value="Login"/>
+                    </properties>
+                  </component>
+                  <scrollpane id="65177">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="51506" class="javax.swing.JTextArea" binding="iChat">
+                        <constraints/>
+                        <properties>
+                          <lineWrap value="false"/>
+                          <text value=""/>
+                          <toolTipText value=""/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <component id="723c0" class="javax.swing.JProgressBar" binding="hot">
+                    <constraints border-constraint="South"/>
+                    <properties>
+                      <minimumSize width="10" height="10"/>
+                      <preferredSize width="146" height="10"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="d434c" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <preferredSize width="1" height="16"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <splitpane id="ab868">
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <dividerLocation value="100"/>
+                      <dividerSize value="1"/>
+                      <enabled value="true"/>
+                      <resizeWeight value="0.5"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="e0eb3" layout-manager="BorderLayout" hgap="0" vgap="0">
+                        <constraints>
+                          <splitpane position="left"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="885f2" class="javax.swing.JLabel" binding="userLabel">
+                            <constraints border-constraint="First"/>
+                            <properties>
+                              <horizontalAlignment value="0"/>
+                              <text value=""/>
+                            </properties>
+                          </component>
+                          <scrollpane id="8a646">
+                            <constraints border-constraint="Center"/>
+                            <properties/>
+                            <border type="none"/>
+                            <children>
+                              <component id="ab082" class="javax.swing.JList" binding="userlist">
+                                <constraints/>
+                                <properties/>
+                              </component>
+                            </children>
+                          </scrollpane>
+                        </children>
+                      </grid>
+                      <grid id="140c4" binding="oChatPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+                        <constraints>
+                          <splitpane position="right"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children/>
+                      </grid>
+                    </children>
+                  </splitpane>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="7418c" binding="draw" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <tabbedpane title="Draw"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </tabbedpane>
+    </children>
+  </grid>
+</form>
